@@ -1,1 +1,2 @@
-# smart-contract-ethereum
+# NFTLab smart contract in Ethereum
+

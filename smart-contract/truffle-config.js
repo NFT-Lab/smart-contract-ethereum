@@ -24,6 +24,10 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require("ts-node").register({
+  files: true,
+});
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -45,7 +49,9 @@ module.exports = {
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
-     network_id: "*",       // Any network (default: none)
+     network_id: 5777,       // Any network (default: none)
+     skipDryRun: false,     // Skip dry run before migrations? (default: false for public nets )
+     from: "0x912E3CEf1745F77b3543390abBF965896133896f"
     },
     // Another network with more advanced options...
     // advanced: {
@@ -93,6 +99,7 @@ module.exports = {
       // }
     }
   },
+  plugins: ["solidity-coverage"],
 
   // Truffle DB is currently disabled by default; to enable it, change enabled: false to enabled: true
   //

@@ -1,0 +1,45 @@
+{
+  "name": "nft-solidity",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "solidity:lint": "prettier --write contracts/**/*.sol",
+    "eslint": "npx eslint . --ext .js,.ts",
+    "eslint:fix": "npx eslint . --fix --ext .js,.ts",
+    "generate-types": "npx typechain --target=truffle-v5 'build/contracts/*.json'",
+    "postinstall": "npx truffle compile && npm run generate-types"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "@openzeppelin/truffle-upgrades": "^1.7.0",
+    "@pinata/sdk": "^1.1.20",
+    "dotenv": "^9.0.2",
+    "solhint": "^3.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilippoFantinato/NFT-solidity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FilippoFantinato/NFT-solidity/issues"
+  },
+  "homepage": "https://github.com/FilippoFantinato/NFT-solidity#readme",
+  "devDependencies": {
+    "@typechain/hardhat": "^2.0.1",
+    "@typechain/truffle-v5": "^5.0.0",
+    "@types/chai": "^4.2.18",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.3.1",
+    "prettier": "^1.19.1",
+    "prettier-plugin-java": "^1.1.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.10",
+    "solidity-coverage": "^0.7.16",
+    "truffle": "^5.3.8",
+    "ts-node": "^10.0.0",
+    "typechain": "^5.0.0",
+    "typescript": "^4.3.2"
+  }
+}

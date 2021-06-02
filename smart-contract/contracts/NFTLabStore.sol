@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity >=0.5.8;
 
-import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "./ERC721URIStorage.sol";
 import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
 
 contract NFTLabStore is ERC721URIStorage {
@@ -11,12 +11,12 @@ contract NFTLabStore is ERC721URIStorage {
     Counters.Counter private _tokenIds;
 
     mapping(uint256 => NFTLab) private _nfts;
-    mapping(string => uint8) private _existingToken;
+    mapping(string => uint256) private _hashToId;
     mapping(uint256 => NFTTransaction[]) private _history;
 
     struct NFTLab {
         address artist;
-        string artistId;
+        uint256 artistId;
         string hash;
         string timestamp;
     }
@@ -24,20 +24,20 @@ contract NFTLabStore is ERC721URIStorage {
     struct NFTTransaction {
         uint256 tokenId;
         address seller;
-        string sellerId;
+        uint256 sellerId;
         address buyer;
-        string buyerId;
+        uint256 buyerId;
         string price;
         string timestamp;
     }
 
-    event Minted(address artist, string artistId, string hash, string timestamp);
+    event Minted(address artist, uint256 artistId, string hash, string timestamp);
     event Transferred(
         uint256 tokenId,
         address seller,
-        string sellerId,
+        uint256 sellerId,
         address buyer,
-        string buyerId,
+        uint256 buyerId,
         string price,
         string timestamp
     );
@@ -51,8 +51,8 @@ contract NFTLabStore is ERC721URIStorage {
         _;
     }
 
-    function mint(NFTLab memory nft) public isOwner returns (uint256) {
-        require(_existingToken[nft.hash] == 0, "Token exists yet");
+    function mint(NFTLab memory nft) public isOwner {
+        require(_hashToId[nft.hash] == 0, "Token exists yet");
 
         _tokenIds.increment();
 
@@ -62,11 +62,11 @@ contract NFTLabStore is ERC721URIStorage {
         _setTokenURI(newTokenId, nft.hash);
 
         _nfts[newTokenId] = nft;
-        _existingToken[nft.hash] = 1;
+        _hashToId[nft.hash] = newTokenId;
+
+        approve(_owner, newTokenId);
 
         emit Minted(nft.artist, nft.artistId, nft.hash, nft.timestamp);
-
-        return newTokenId;
     }
 
     function transfer(NFTTransaction memory transaction) public isOwner {
@@ -88,10 +88,30 @@ contract NFTLabStore is ERC721URIStorage {
     }
 
     function getHistory(uint256 tokenId) public view isOwner returns (NFTTransaction[] memory) {
+        require(_exists(tokenId), "Unable to get the history of a non-existent NFT.");
+
         return _history[tokenId];
     }
 
+    function getTokenId(string memory hash) public view isOwner returns (uint256) {
+        require(_hashToId[hash] != 0, "Unable to get the ID of a non-existent NFT.");
+
+        return _hashToId[hash];
+    }
+
+    function getNFT(string memory hash) public view isOwner returns (NFTLab memory) {
+        require(_hashToId[hash] != 0, "Unable to get a non-existent NFT.");
+
+        return _nfts[_hashToId[hash]];
+    }
+
+    function getNFT(uint256 id) public view isOwner returns (NFTLab memory) {
+        require(_exists(id), "Unable to get a non-existent NFT.");
+
+        return _nfts[id];
+    }
+
     function _baseURI() internal pure override returns (string memory) {
-        return "https://gateway.pinata.cloud/";
+        return "https://cloudflare-ipfs.com/ipfs/";
     }
 }

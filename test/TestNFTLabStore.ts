@@ -1,7 +1,7 @@
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { BigNumberish } from '@ethersproject/bignumber';
-import { NFTLabStore } from '../typechain';
+import { NFTLabStore } from 'typechain';
 
 describe('Testing NFTLabStore contract', async () => {
   let nftLabStore: NFTLabStore;

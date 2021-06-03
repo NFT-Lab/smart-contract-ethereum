@@ -121,3 +121,5 @@ cache
 artifacts
 typechain
 
+# Coverage
+coverage.json

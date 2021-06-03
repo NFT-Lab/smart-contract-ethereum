@@ -3,7 +3,6 @@
   "rules": {
     "prettier/prettier": "error",
     "avoid-suicide": "error",
-    "ignoreConstructors": true,
     "avoid-sha3": "warn"
   },
   "plugins": ["prettier"]

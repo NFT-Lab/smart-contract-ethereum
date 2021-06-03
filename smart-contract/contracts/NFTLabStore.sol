@@ -2,7 +2,24 @@
 pragma solidity >=0.5.8;
 
 import "./ERC721URIStorage.sol";
-import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+struct NFTLab {
+    address artist;
+    uint256 artistId;
+    string hash;
+    string timestamp;
+}
+
+struct NFTTransaction {
+    uint256 tokenId;
+    address seller;
+    uint256 sellerId;
+    address buyer;
+    uint256 buyerId;
+    string price;
+    string timestamp;
+}
 
 contract NFTLabStore is ERC721URIStorage {
     address private _owner;
@@ -14,30 +31,11 @@ contract NFTLabStore is ERC721URIStorage {
     mapping(string => uint256) private _hashToId;
     mapping(uint256 => NFTTransaction[]) private _history;
 
-    struct NFTLab {
-        address artist;
-        uint256 artistId;
-        string hash;
-        string timestamp;
-    }
-
-    struct NFTTransaction {
-        uint256 tokenId;
-        address seller;
-        uint256 sellerId;
-        address buyer;
-        uint256 buyerId;
-        string price;
-        string timestamp;
-    }
-
-    event Minted(address artist, uint256 artistId, string hash, string timestamp);
+    event Minted(address artist, string hash, string timestamp);
     event Transferred(
         uint256 tokenId,
         address seller,
-        uint256 sellerId,
         address buyer,
-        uint256 buyerId,
         string price,
         string timestamp
     );
@@ -47,12 +45,12 @@ contract NFTLabStore is ERC721URIStorage {
     }
 
     modifier isOwner() {
-        require(msg.sender == _owner, "Only owner can do this operation");
+        require(msg.sender == _owner, "Only owner can do this operation.");
         _;
     }
 
     function mint(NFTLab memory nft) public isOwner {
-        require(_hashToId[nft.hash] == 0, "Token exists yet");
+        require(_hashToId[nft.hash] == 0, "Token exists yet.");
 
         _tokenIds.increment();
 
@@ -66,7 +64,7 @@ contract NFTLabStore is ERC721URIStorage {
 
         approve(_owner, newTokenId);
 
-        emit Minted(nft.artist, nft.artistId, nft.hash, nft.timestamp);
+        emit Minted(nft.artist, nft.hash, nft.timestamp);
     }
 
     function transfer(NFTTransaction memory transaction) public isOwner {
@@ -79,9 +77,7 @@ contract NFTLabStore is ERC721URIStorage {
         emit Transferred(
             transaction.tokenId,
             transaction.seller,
-            transaction.sellerId,
             transaction.buyer,
-            transaction.buyerId,
             transaction.price,
             transaction.timestamp
         );
@@ -99,13 +95,13 @@ contract NFTLabStore is ERC721URIStorage {
         return _hashToId[hash];
     }
 
-    function getNFT(string memory hash) public view isOwner returns (NFTLab memory) {
+    function getNFTByHash(string memory hash) public view isOwner returns (NFTLab memory) {
         require(_hashToId[hash] != 0, "Unable to get a non-existent NFT.");
 
         return _nfts[_hashToId[hash]];
     }
 
-    function getNFT(uint256 id) public view isOwner returns (NFTLab memory) {
+    function getNFTById(uint256 id) public view isOwner returns (NFTLab memory) {
         require(_exists(id), "Unable to get a non-existent NFT.");
 
         return _nfts[id];

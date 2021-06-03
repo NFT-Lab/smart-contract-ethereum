@@ -1,43 +1,40 @@
 {
-  "name": "nft-solidity",
+  "name": "nftlab-smart-contract-in-ethereum",
+  "version": "0.0.1",
   "description": "",
-  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "solidity:lint": "prettier --write contracts/**/*.sol",
-    "eslint": "npx eslint . --ext .js,.ts",
-    "eslint:fix": "npx eslint . --fix --ext .js,.ts",
-    "generate-types": "npx typechain --target=truffle-v5 'build/contracts/*.json'",
-    "postinstall": "npx truffle compile && npm run generate-types"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.1.0",
-    "@openzeppelin/truffle-upgrades": "^1.7.0",
-    "@pinata/sdk": "^1.1.20",
-    "dotenv": "^9.0.2",
-    "solhint": "^3.3.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FilippoFantinato/NFT-solidity.git"
+    "eslint": "eslint . --ext .js,.ts",
+    "eslint:fix": "eslint . --fix --ext .js,.ts"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FilippoFantinato/NFT-solidity/issues"
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "@openzeppelin/hardhat-upgrades": "^1.8.2",
+    "hardhat": "^2.3.0",
+    "hardhat-deploy-ethers": "^0.3.0-beta.7",
+    "solidity-coverage": "^0.7.16"
   },
-  "homepage": "https://github.com/FilippoFantinato/NFT-solidity#readme",
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@typechain/ethers-v5": "^7.0.0",
     "@typechain/hardhat": "^2.0.1",
-    "@typechain/truffle-v5": "^5.0.0",
     "@types/chai": "^4.2.18",
     "@types/mocha": "^8.2.2",
-    "@types/node": "^15.3.1",
-    "prettier": "^1.19.1",
-    "prettier-plugin-java": "^1.1.1",
-    "prettier-plugin-solidity": "^1.0.0-beta.10",
-    "solidity-coverage": "^0.7.16",
-    "truffle": "^5.3.8",
+    "@types/node": "^15.6.2",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.23.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.3.0",
+    "prettier": "^2.3.0",
+    "prettier-plugin-solidity": "^1.0.0-beta.11",
+    "solhint": "^3.3.6",
     "ts-node": "^10.0.0",
     "typechain": "^5.0.0",
     "typescript": "^4.3.2"

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "./smart-contracr/dist",
+    "resolveJsonModule": true,
+    "baseUrl": "./smart-contract/"
+  },
+  "include": ["./smart-contract/scripts", "./smart-contract/test"],
+  "files": ["./smart-contract/hardhat.config.ts"]
+}

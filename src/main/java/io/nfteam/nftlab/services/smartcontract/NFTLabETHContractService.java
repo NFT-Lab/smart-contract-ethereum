@@ -38,12 +38,16 @@ public class NFTLabETHContractService
         this.contract = loadContract();
     }
 
-    public BigInteger mint(NFTLabStore.NFTLab nft) throws Exception {
-        return this.contract.mint(nft).send();
+    public void mint(NFTLabStore.NFTLab nft) throws Exception {
+        this.contract.mint(nft).send();
     }
 
     public List getHistory(BigInteger tokenId) throws Exception {
         return this.contract.getHistory(tokenId).send();
+    }
+
+    public BigInteger getTokenId(String hash) throws Exception {
+        return this.contract.getTokenId(hash).send();
     }
 
     public void transfer(NFTLabStore.NFTTransaction transaction) throws Exception {

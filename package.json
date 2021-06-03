@@ -1,32 +1,7 @@
 {
-  "name": "nft-solidity",
-  "description": "",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "solidity:lint": "prettier --write contracts/**/*.sol"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.1.0",
-    "@openzeppelin/truffle-upgrades": "^1.7.0",
-    "@pinata/sdk": "^1.1.20",
-    "dotenv": "^9.0.2",
-    "solhint": "^3.3.4",
-    "truffle": "^5.3.8"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FilippoFantinato/NFT-solidity.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FilippoFantinato/NFT-solidity/issues"
-  },
-  "homepage": "https://github.com/FilippoFantinato/NFT-solidity#readme",
   "devDependencies": {
-    "prettier": "^1.19.1",
-    "prettier-plugin-java": "^1.1.1",
-    "prettier-plugin-solidity": "^1.0.0-beta.10"
+    "eslint": "^7.27.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0"
   }
 }

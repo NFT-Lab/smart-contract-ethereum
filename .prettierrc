@@ -1,5 +1,6 @@
 {
   "printWidth": 100,
   "singleQuote": false,
-  "useTabs": false
+  "useTabs": false,
+  "tabWidth": 2
 }

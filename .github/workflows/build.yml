@@ -1,13 +1,13 @@
 name: Build smart contracts
 
 on:
-  pull_request:
+  push:
     branches: [main, develop]
 
   workflow_dispatch:
 
 jobs:
-  Check:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
       - name: Run unit tests and coverage
         run: npm run coverage
 
-      - name: Publish code coverage to coveralls
-        run: npm run coveralls
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
         with:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}

@@ -4,7 +4,7 @@
     "node": true
   },
   "parser": "@typescript-eslint/parser",
-  "extends": ["airbnb-typescript"],
+  "extends": ["airbnb-typescript/base"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },

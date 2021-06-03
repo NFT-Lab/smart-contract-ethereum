@@ -9,11 +9,11 @@
     "eslint": "eslint . --ext .js,.ts",
     "eslint:fix": "eslint . --fix --ext .js,.ts",
     "lint": "npm run eslint && npm run solhint",
-    "test": "hardhat test",
-    "coverage": "hardhat coverage"
+    "test": "hardhat compile && hardhat test",
+    "coverage": "hardhat compile && hardhat coverage"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Filippo Fantinato",
+  "license": "MIT",
   "dependencies": {
     "@openzeppelin/contracts": "^4.1.0",
     "@openzeppelin/hardhat-upgrades": "^1.8.2",

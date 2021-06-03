@@ -4,23 +4,6 @@ pragma solidity >=0.5.8;
 import "./ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-struct NFTLab {
-  address artist;
-  uint256 artistId;
-  string hash;
-  string timestamp;
-}
-
-struct NFTTransaction {
-  uint256 tokenId;
-  address seller;
-  uint256 sellerId;
-  address buyer;
-  uint256 buyerId;
-  string price;
-  string timestamp;
-}
-
 contract NFTLabStore is ERC721URIStorage {
   address private _owner;
 
@@ -33,6 +16,23 @@ contract NFTLabStore is ERC721URIStorage {
 
   event Minted(address artist, string hash, string timestamp);
   event Transferred(uint256 tokenId, address seller, address buyer, string price, string timestamp);
+
+  struct NFTLab {
+    address artist;
+    uint256 artistId;
+    string hash;
+    string timestamp;
+  }
+
+  struct NFTTransaction {
+    uint256 tokenId;
+    address seller;
+    uint256 sellerId;
+    address buyer;
+    uint256 buyerId;
+    string price;
+    string timestamp;
+  }
 
   constructor(string memory name, string memory symbol) ERC721(name, symbol) {
     _owner = msg.sender;

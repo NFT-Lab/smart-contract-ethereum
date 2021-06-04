@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.5.8;
 
-import "./ERC721URIStorage.sol";
+import "./ERC721/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract NFTLabStore is ERC721URIStorage {

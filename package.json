@@ -24,6 +24,7 @@
     "solidity-coverage": "^0.7.16"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^8.10.2",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@typechain/ethers-v5": "^7.0.0",

@@ -7,7 +7,6 @@ classDiagram
 	NFTLabStore : -mapping~uint256, NFTTransaction[]~ _history
 
 	NFTLabStore : +constructor(string name, string symbol)
-	NFTLabStore : +isOwner()
 	NFTLabStore : Minted(address artist, string hash, string timestamp)
 	NFTLabStore : Transferred(uint256 tokenId, address seller, address buyer, string price, string timestamp)
 	NFTLabStore : +mint(NFTLab nft)
@@ -17,6 +16,7 @@ classDiagram
 	NFTLabStore : +getNFTByHash(string hash) NFTLab
 	NFTLabStore : +getNFTById(uint256 id) NFTLab
 	NFTLabStore : #baseURI() string
+	NFTLabStore : -isOwner()
 
     NFTLabStore --|> ERC721URIStorage
 	NFTLabStore ..> NFTLab

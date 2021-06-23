@@ -72,11 +72,11 @@ Dello standard è stato modificato solamente il sistema di approvazione, in modo
 
 ##### Metodi
 
-- **mint(NFTLab memory nft):** permette la creazione di un nuovo NFT
+- **mint(NFTLab nft):** permette la creazione di un nuovo NFT
   - **View:** false
   - **Modificatori:**
     - isOwner
-- **transfer(NFTTransaction memory transaction):** permette di trasferire un NFT da un wallet ad un altro
+- **transfer(NFTTransaction transaction):** permette di trasferire un NFT da un wallet ad un altro
   - **View:** false
   - **Modificatori:**
     - isOwner
@@ -84,11 +84,11 @@ Dello standard è stato modificato solamente il sistema di approvazione, in modo
   - **View:** true
   - **Modificatori:**
     - isOwner
-- **getTokenId(string memory hash) uint256:** permette di ottenere l'id di un NFT a partire dal suo hash
+- **getTokenId(string hash) uint256:** permette di ottenere l'id di un NFT a partire dal suo hash
   - **View:** true
   - **Modificatori:**
     - isOwner
-- **getNFTByHash(string memory hash) NFTLab:** permette di ottenere un NFT a partire dal suo hash
+- **getNFTByHash(string hash) NFTLab:** permette di ottenere un NFT a partire dal suo hash
   - **View:** true
   - **Modificatori:**
     - isOwner

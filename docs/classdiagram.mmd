@@ -1,0 +1,38 @@
+classDiagram
+    class ERC721URIStorage
+
+	class NFTLabStore
+	NFTLabStore : -mapping~uint256, NFTLab~ _nfts
+	NFTLabStore : -mapping~string, uint256~ _hashToId
+	NFTLabStore : -mapping~uint256, NFTTransaction[]~ _history
+
+	NFTLabStore : +constructor(string name, string symbol)
+	NFTLabStore : +isOwner()
+	NFTLabStore : Minted(address artist, string hash, string timestamp)
+	NFTLabStore : Transferred(uint256 tokenId, address seller, address buyer, string price, string timestamp)
+	NFTLabStore : +mint(NFTLab nft)
+	NFTLabStore : +transfer(NFTTransaction transaction)
+	NFTLabStore : +getHistory(uint256 tokenId) NFTTransaction[]
+	NFTLabStore : +getTokenId(string hash) uint256
+	NFTLabStore : +getNFTByHash(string hash) NFTLab
+	NFTLabStore : +getNFTById(uint256 id) NFTLab
+	NFTLabStore : #baseURI() string
+
+    NFTLabStore --|> ERC721URIStorage
+	NFTLabStore ..> NFTLab
+	NFTLabStore ..> NFTTransaction
+
+	class NFTLab
+	NFTLab : +address artist
+	NFTLab : +uint256 artistId
+	NFTLab : +string hash
+	NFTLab : +string timestamp
+
+	class NFTTransaction
+	NFTTransaction : +uint256 tokenId
+	NFTTransaction : +address seller
+	NFTTransaction : +uint256 sellerId
+	NFTTransaction : +address buyer
+	NFTTransaction : +uint256 buyerId
+	NFTTransaction : +string price
+	NFTTransaction : +string timestamp

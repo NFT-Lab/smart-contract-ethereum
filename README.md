@@ -1,5 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true});</script>
 # NFTLab smart contract in Ethereum
 
 [![Coverage Status](https://coveralls.io/repos/github/NFT-Lab/smart-contract-ethereum/badge.svg?branch=main&service=github)](https://coveralls.io/github/NFT-Lab/smart-contract-ethereum?branch=main)
@@ -7,13 +5,11 @@
 
 La seguente repository contiene lo smart contract per Ethereum per la gestione della compra vendita di NFT nella piattaforma NFTLab.
 
-[TOC]
-
 ## Strumenti utilizzati
 
 - **[Node.js](https://nodejs.org/it/)**.
 - **[NPM](https://www.npmjs.com/):** il package manager di default per la gestione di pacchetti con node.js.
-- **[Typescript](https://www.typescriptlang.org/):** un superset di javascript il quale aggiunge la tipizzazione e molti altri costrutti. 
+- **[Typescript](https://www.typescriptlang.org/):** un superset di javascript il quale aggiunge la tipizzazione e molti altri costrutti.
 - **[Hardhat](https://hardhat.org/):** uno strumento semplice e veloce per la scrittura di smart contract, il quale automatizza la compilazione, il deploy e l'esecuzione dei test. Tutti gli script possono essere scritti utilizzando anche il linguaggio Typescript e, insieme ad un plugin chiamato typechain che viene integrato direttamente durante la compilazione, è possibile scrivere i test di uno smart contract a partire da un'interfaccia dello smart contract. Hardhat ha una grande comunity e molti plugin che permettono di svolgere qualsiasi operazione.
 - **[Solhint.js](https://github.com/protofire/solhint):** linter per il linguaggio solidity.
 - **[Solidity-coverage](https://github.com/sc-forks/solidity-coverage):** strumento per ottenere il code coverage di un contratto scritto in solidity.
@@ -54,47 +50,7 @@ Dello standard è stato modificato solamente il sistema di approvazione, in modo
 
 #### NFTLabStore
 
-```mermaid
-classDiagram
-    class ERC721URIStorage
-    
-	class NFTLabStore
-	NFTLabStore : -mapping~uint256, NFTLab~ _nfts
-	NFTLabStore : -mapping~string, uint256~ _hashToId
-	NFTLabStore : -mapping~uint256, NFTTransaction[]~ _history
-
-	NFTLabStore : +constructor(string name, string symbol)
-	NFTLabStore : +isOwner()
-	NFTLabStore : Minted(address artist, string hash, string timestamp)
-	NFTLabStore : Transferred(uint256 tokenId, address seller, address buyer, string price, string timestamp)
-	NFTLabStore : +mint(NFTLab nft)
-	NFTLabStore : +transfer(NFTTransaction transaction)
-	NFTLabStore : +getHistory(uint256 tokenId) NFTTransaction[]
-	NFTLabStore : +getTokenId(string hash) uint256
-	NFTLabStore : +getNFTByHash(string hash) NFTLab
-	NFTLabStore : +getNFTById(uint256 id) NFTLab
-	NFTLabStore : #baseURI() string
-	
-    NFTLabStore --|> ERC721URIStorage
-	NFTLabStore ..> NFTLab
-	NFTLabStore ..> NFTTransaction
-	
-	class NFTLab
-	NFTLab : +address artist
-	NFTLab : +uint256 artistId
-	NFTLab : +string hash
-	NFTLab : +string timestamp
-	
-	class NFTTransaction
-	NFTTransaction : +uint256 tokenId
-	NFTTransaction : +address seller
-	NFTTransaction : +uint256 sellerId
-	NFTTransaction : +address buyer
-	NFTTransaction : +uint256 buyerId
-	NFTTransaction : +string price
-	NFTTransaction : +string timestamp
-	
-```
+![Class diagram](./docs/images/classdiagram.svg)
 
 ##### Costruttori
 
@@ -102,44 +58,44 @@ classDiagram
 
 ##### Modificatori
 
-* **isOwner:** permette l'esecuzione del metodo solamente al proprietario del contratto.
+- **isOwner:** permette l'esecuzione del metodo solamente al proprietario del contratto.
 
 ##### Eventi
 
-* **Minted**: evento che segnala la creazione di un nuovo NFT.
-* **Transferred**: evento che segnala il trasferimento di un NFT da un wallet ad un altro.
+- **Minted**: evento che segnala la creazione di un nuovo NFT.
+- **Transferred**: evento che segnala il trasferimento di un NFT da un wallet ad un altro.
 
 ##### Strutture
 
-* **NFTLab:** consiste in un NFT.
-* **NFTTransaction:** consiste in una transazione di un NFT.
+- **NFTLab:** consiste in un NFT.
+- **NFTTransaction:** consiste in una transazione di un NFT.
 
 ##### Metodi
 
-* **mint(NFTLab memory nft):** permette la creazione di un nuovo NFT
-  * **View:** false
-  * **Modificatori:** 
-    * isOwner
-* **transfer(NFTTransaction memory transaction):** permette di trasferire un NFT da un wallet ad un altro
-  * **View:** false
-  * **Modificatori:** 
-    * isOwner
-* **getHistory(uint256 tokenId) NFTTransaction[]:** permette di ottenere la storia delle transazioni di un NFT a partire dal suo ID
-  * **View:** true
-  * **Modificatori:** 
-    * isOwner
-* **getTokenId(string memory hash) uint256:** permette di ottenere l'id di un NFT a partire dal suo hash
-  * **View:** true
-  * **Modificatori:** 
-    * isOwner
-* **getNFTByHash(string memory hash) NFTLab:** permette di ottenere un NFT a partire dal suo hash
-  * **View:** true
-  * **Modificatori:** 
-    * isOwner
-* **getNFTById(uint256 id) NFTLab:** permette di ottenere un NFT a partire dal suo id
-  * **View:** true
-  * **Modificatori:** 
-    * isOwner
+- **mint(NFTLab memory nft):** permette la creazione di un nuovo NFT
+  - **View:** false
+  - **Modificatori:**
+    - isOwner
+- **transfer(NFTTransaction memory transaction):** permette di trasferire un NFT da un wallet ad un altro
+  - **View:** false
+  - **Modificatori:**
+    - isOwner
+- **getHistory(uint256 tokenId) NFTTransaction[]:** permette di ottenere la storia delle transazioni di un NFT a partire dal suo ID
+  - **View:** true
+  - **Modificatori:**
+    - isOwner
+- **getTokenId(string memory hash) uint256:** permette di ottenere l'id di un NFT a partire dal suo hash
+  - **View:** true
+  - **Modificatori:**
+    - isOwner
+- **getNFTByHash(string memory hash) NFTLab:** permette di ottenere un NFT a partire dal suo hash
+  - **View:** true
+  - **Modificatori:**
+    - isOwner
+- **getNFTById(uint256 id) NFTLab:** permette di ottenere un NFT a partire dal suo id
+  - **View:** true
+  - **Modificatori:**
+    - isOwner
 
 ### Scripts
 
@@ -161,7 +117,7 @@ Per comodità si consiglia l'installazione del tool [Shorthand and autocomplete]
 
 ### Build
 
-Viene eseguita dalla action presente nel file **build.yml** ad ogni push nel **main** o nel **develop** e ha il compito di compilare, eseguire i test e inviare il report del code coverage a **coveralls**. 
+Viene eseguita dalla action presente nel file **build.yml** ad ogni push nel **main** o nel **develop** e ha il compito di compilare, eseguire i test e inviare il report del code coverage a **coveralls**.
 
 ### Check
 

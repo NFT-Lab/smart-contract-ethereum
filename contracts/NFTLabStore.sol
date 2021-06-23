@@ -64,7 +64,7 @@ contract NFTLabStore is ERC721URIStorage {
   function transfer(NFTTransaction memory transaction) public isOwner {
     uint256 tokenId = transaction.tokenId;
 
-    safeTransferFrom(transaction.seller, transaction.buyer, tokenId, "");
+    safeTransferFrom(transaction.seller, transaction.buyer, tokenId);
 
     _history[tokenId].push(transaction);
 
